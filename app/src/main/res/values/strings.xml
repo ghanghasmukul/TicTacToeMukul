@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TicTacToeMukul</string>
+    <string name="player_name">Player %d - </string>
+    <string name="player_time">%d sec.</string>
+</resources>
