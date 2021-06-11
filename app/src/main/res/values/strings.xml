@@ -2,4 +2,11 @@
     <string name="app_name">TicTacToeMukul</string>
     <string name="player_name">Player %d - </string>
     <string name="player_time">%d sec.</string>
+
+    <string-array name="spinner_arrays">
+        <item>Default X and 0</item>
+        <item>Tom and Jerry</item>
+        <item>Virat and Rohit</item>
+
+    </string-array>
 </resources>

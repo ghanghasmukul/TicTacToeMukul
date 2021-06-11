@@ -21,111 +21,87 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardMain"
         android:layout_width="match_parent"
-        android:layout_height="473dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/bgimage"
+        android:elevation="16dp"
         android:focusableInTouchMode="true"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="24dp">
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bgimage" />
+            android:layout_height="527dp"
+            android:background="@drawable/bgimage" ></FrameLayout>
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Tic Tac Toe"
-            android:textAlignment="center"
-            android:textColor="#D65151"
-            android:textSize="56sp"
+            android:orientation="vertical">
 
-            />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Game Type"
-            android:textColor="@color/teal_700"
-            android:textSize="36dp"
-            android:textAlignment="center"
-            android:layout_marginTop="330dp"
-            android:textStyle="italic"
-
-            />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="286dp"
-            android:layout_height="181dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/main2" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/white"
-            android:padding="4dp"
-            android:clickable="true"
-            android:layout_marginHorizontal="4dp"
-            android:layout_marginBottom="16dp"
-
-
-
-
-
-            >
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipDefault"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
-                android:clickable="true"
-                android:text="Default"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:text="TicTacToe"
                 android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textIsSelectable="true"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/teal_700"
+                android:textSize="56sp"
+                android:textStyle="italic"
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipChoice1"
-                android:layout_width="wrap_content"
+                />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="375dp"
+                android:layout_height="201dp"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/main2" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
-                android:clickable="true"
-                android:text="Tom and Jerry"
+                android:layout_marginTop="16dp"
+                android:text="Let the fun begins"
                 android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textIsSelectable="true"
+                android:textColor="@color/teal_700"
+                android:textSize="36dp"
+                android:textStyle="italic"
 
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipChoice2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/selectCharactersSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bgimage"
                 android:clickable="true"
-                android:text="Viraj and Rohit"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textIsSelectable="true"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:focusable="true"
+                android:gravity="center"
+                android:hint="Choose Players"
+                android:padding="8dp"
+                android:textColor="@color/teal_700"
+                android:textColorHint="@color/teal_700"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                app:spinner_arrow_animate="true"
+                app:spinner_arrow_drawable="@drawable/ic_baseline_keyboard_arrow_down_24"
+                app:spinner_arrow_gravity="end"
+                app:spinner_arrow_padding="8dp"
+                app:spinner_arrow_show="true"
+                app:spinner_arrow_tint="@color/teal_700"
+                app:spinner_divider_color="@color/black"
+                app:spinner_divider_show="true"
+                app:spinner_divider_size="0.4dp"
+                app:spinner_item_array="@array/spinner_arrays"
+                app:spinner_popup_animation="dropdown"
+                app:spinner_popup_background="@color/white"
+                app:spinner_popup_elevation="8dp" />
 
-        </com.google.android.material.chip.ChipGroup>
-
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
@@ -133,7 +109,7 @@
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="250dp"
         android:backgroundTint="@color/white"
         android:focusableInTouchMode="true"
         app:cardCornerRadius="16dp">

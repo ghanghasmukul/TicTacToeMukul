@@ -1,5 +1,6 @@
 package com.example.tictactoemukul;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
@@ -20,8 +22,14 @@ public class MainActivity extends AppCompatActivity {
     GridLayout mGridLayout, mScoreGrid;
     long timeOfClick;
 
+    int pos = 0;
+
     int[][] winnerRowsColumns = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
             {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
+
+    int[][] charactersArrays = {{R.drawable.oimage, R.drawable.ximage}, {R.drawable.tom, R.drawable.jerry}, {R.drawable.rohit, R.drawable.virat}};
+
+    String[][] nameOfPlayersArray = {{"0", "X"}, {"Tom", "Jerry"}, {"Rohit", "Virat"}};
 
     String winner = "";
 
@@ -46,12 +54,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try
-        {
+        try {
             this.getSupportActionBar().hide();
+        } catch (NullPointerException e) {
         }
-        catch (NullPointerException e){}
         setContentView(R.layout.activity_main);
+
+
+        //Default value = 0 and if we get some value from intent then that will be assigned to pos
+        pos = getIntent().getIntExtra(ScreenMain.selectedPosKey, 0);
 
         playerName = findViewById(R.id.playerName);
         playerTime = findViewById(R.id.playerTime);
@@ -59,55 +70,54 @@ public class MainActivity extends AppCompatActivity {
         mGridLayout = findViewById(R.id.gridLayout);
         mScoreGrid = findViewById(R.id.scoreGrid);
         resetEverything();
+        setScores();
+
     }
 
-    public void onTapImage(View view){
+    public void onTapImage(View view) {
         ImageView clickImageView = (ImageView) view;
 
         int index = Integer.parseInt(clickImageView.getTag().toString());
 
 
-
-        if(gridPositions[index] == Player.No && !gameOver && filledGrids <9){
-            if(currentPlayer == Player.One){
+        if (gridPositions[index] == Player.No && !gameOver && filledGrids < 9) {
+            if (currentPlayer == Player.One) {
                 gridPositions[index] = Player.One;
-                clickImageView.setImageResource(R.drawable.oimage);
+                clickImageView.setImageResource(charactersArrays[pos][0]);
                 clickImageView.setAlpha(1.0f);
                 currentPlayer = Player.Two;
                 playerName.setText(getResources().getString(R.string.player_name, 2));
-            }
-            else{
+            } else {
                 gridPositions[index] = Player.Two;
-                clickImageView.setImageResource(R.drawable.ximage);
+                clickImageView.setImageResource(charactersArrays[pos][1]);
                 clickImageView.setAlpha(1.0f);
                 currentPlayer = Player.One;
                 playerName.setText(getResources().getString(R.string.player_name, 1));
             }
             filledGrids++;
 
-            if(filledGrids >= 5 && filledGrids <=9){
+            if (filledGrids >= 5 && filledGrids <= 9) {
 
-                for (int[] winnerRow: winnerRowsColumns) {
-                    Log.e("winnerRow", winnerRow[0]+ "," + winnerRow[1] +","+ winnerRow[2]+" - "+winner);
-                    if(gridPositions[winnerRow[0]] == gridPositions[winnerRow[1]] &&
-                            gridPositions[winnerRow[1]] == gridPositions[winnerRow[2]] && gridPositions[winnerRow[0]] != Player.No){
-                        if(currentPlayer == Player.One){
-                            winner = "Tiger - Player 2";
+                for (int[] winnerRow : winnerRowsColumns) {
+                    Log.e("winnerRow", winnerRow[0] + "," + winnerRow[1] + "," + winnerRow[2] + " - " + winner);
+                    if (gridPositions[winnerRow[0]] == gridPositions[winnerRow[1]] &&
+                            gridPositions[winnerRow[1]] == gridPositions[winnerRow[2]] && gridPositions[winnerRow[0]] != Player.No) {
+                        if (currentPlayer == Player.One) {
+                            winner = nameOfPlayersArray[pos][1] + " - Player 2";
                             displayOnResult("Player 2 Won",
                                     "Player 2 have won this come,\nCome On Player 1.",
                                     R.raw.won,
                                     2);
-                        }
-                        else{
-                            winner = "Lion - Player 1";
+                        } else {
+                            winner = nameOfPlayersArray[pos][0] + " - Player 1";
                             displayOnResult("Player 1 Won",
                                     "Player 1 have won this come,\nCome On Player 2.",
                                     R.raw.won,
                                     1);
                         }
                         gameOver = true;
-                        Log.e("winnerRow", winnerRow[0]+ "," + winnerRow[1] +","+ winnerRow[2]+" - "+winner);
-                        if(mCountDownTimer!=null){
+                        Log.e("winnerRow", winnerRow[0] + "," + winnerRow[1] + "," + winnerRow[2] + " - " + winner);
+                        if (mCountDownTimer != null) {
                             mCountDownTimer.cancel();
                             mCountDownTimer = null;
                         }
@@ -116,50 +126,65 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            if(filledGrids >=9 && !gameOver){
+            if (filledGrids >= 9 && !gameOver) {
                 gameOver = true;
                 displayOnResult("Game is Drawn"
                         , "No one have won the game.\nTry Again.", R.raw.loader, 0);
-                if(mCountDownTimer!=null){
+                if (mCountDownTimer != null) {
                     mCountDownTimer.cancel();
                     mCountDownTimer = null;
                 }
             }
 
-            if(!gameOver && filledGrids < 9){
+            if (!gameOver && filledGrids < 9) {
                 remainingTime = 20;
-                if(mCountDownTimer!=null){
+                if (mCountDownTimer != null) {
                     mCountDownTimer.cancel();
                     mCountDownTimer = null;
                 }
                 setTimer(remainingTime);
             }
-        }
-        else{
+        } else {
             Toast.makeText(this, "This Grid is already filled or Game is over.", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    // Player 1 = 1, Player 2 = 2, Draw = 0
 
-    private void displayOnResult(String title, String message, Integer gifImage, int whoWon){
+    private void setScores() {
 
-        switch (whoWon){
-            case 1:{
+        scorePlayer1 = getIntent().getIntExtra(ScreenMain.player1ScoreKey, 0);
+        scorePlayer2 = getIntent().getIntExtra(ScreenMain.player2ScoreKey, 0);
+        scoreDraw = getIntent().getIntExtra(ScreenMain.drawScoreKey, 0);
+
+
+        TextView textView = (TextView) mScoreGrid.getChildAt(3);
+        textView.setText(scorePlayer1 + "");
+        textView = (TextView) mScoreGrid.getChildAt(4);
+        textView.setText(scorePlayer2 + "");
+        textView = (TextView) mScoreGrid.getChildAt(5);
+        textView.setText(scoreDraw + "");
+
+
+    }
+
+    private void displayOnResult(String title, String message, Integer gifImage, int whoWon) {
+
+        switch (whoWon) {
+            case 1: {
                 TextView textView = (TextView) mScoreGrid.getChildAt(3);
                 scorePlayer1++;
                 textView.setText(String.valueOf(scorePlayer1));
                 break;
             }
-            case 2:{
+            case 2: {
                 TextView textView = (TextView) mScoreGrid.getChildAt(4);
                 scorePlayer2++;
                 textView.setText(String.valueOf(scorePlayer2));
                 break;
             }
             case 0:
-            default:{
+            default: {
                 TextView textView = (TextView) mScoreGrid.getChildAt(5);
                 scoreDraw++;
                 textView.setText(String.valueOf(scoreDraw));
@@ -171,17 +196,22 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("Okay", R.drawable.ic_baseline_done_24, new MaterialDialog.OnClickListener() {
+                .setPositiveButton("Next", R.drawable.ic_baseline_done_24, new MaterialDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         dialogInterface.dismiss();
                         resetEverything();
                     }
                 })
-                .setNegativeButton("Exit", R.drawable.ic_outline_cancel_24, new MaterialDialog.OnClickListener() {
+                .setNegativeButton("Change Characters", R.drawable.ic_outline_cancel_24, new MaterialDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         dialogInterface.dismiss();
+                        Intent intent = new Intent(MainActivity.this, ScreenMain.class);
+                        intent.putExtra(ScreenMain.player1ScoreKey, scorePlayer1);
+                        intent.putExtra(ScreenMain.player2ScoreKey, scorePlayer2);
+                        intent.putExtra(ScreenMain.drawScoreKey, scoreDraw);
+                        startActivity(intent);
                         finish();
                     }
                 })
@@ -189,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 .build().show();
     }
 
-    private void resetEverything(){
+    private void resetEverything() {
         remainingTime = 20;
         gameOver = false;
         filledGrids = 0;
@@ -198,12 +228,12 @@ public class MainActivity extends AppCompatActivity {
         playerName.setText(getResources().getString(R.string.player_name, 1));
         playerTime.setText(getResources().getString(R.string.player_time, remainingTime));
 
-        if(mCountDownTimer !=null){
+        if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
             mCountDownTimer = null;
             setTimer(remainingTime);
         }
-        for(int i=0; i<9; i++) {
+        for (int i = 0; i < 9; i++) {
             gridPositions[i] = Player.No;
 
             ImageView imageView = (ImageView) mGridLayout.getChildAt(i);
@@ -212,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setTimer(int duration){
+    private void setTimer(int duration) {
         mCountDownTimer = new CountDownTimer(duration * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -229,16 +259,16 @@ public class MainActivity extends AppCompatActivity {
         mCountDownTimer.start();
     }
 
-    private void makeAutomaticMove(){
+    private void makeAutomaticMove() {
 
         boolean isValid = false;
 
-        while(!isValid){
+        while (!isValid) {
             //it will return a value between 0 and 8
             int index = new Random().nextInt(9);
             Log.e("indexValue", index + "");
 
-            if(gridPositions[index] == Player.No){
+            if (gridPositions[index] == Player.No) {
                 isValid = true;
 
                 ImageView imageView = (ImageView) mGridLayout.getChildAt(index);
@@ -246,15 +276,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         if (timeOfClick + 2000 > System.currentTimeMillis()) {
 
             super.onBackPressed();
             return;
-        }
-        else{
-            Toast.makeText(MainActivity.this,"prees again to exit or press exit",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainActivity.this, "prees again to exit or press exit", Toast.LENGTH_SHORT).show();
         }
         timeOfClick = System.currentTimeMillis();
     }
