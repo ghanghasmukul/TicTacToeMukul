@@ -1,7 +1,6 @@
 package com.example.tictactoemukul;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class ScreenMain extends AppCompatActivity {
     Button btnStart;
     PowerSpinnerView selectCharactersSpinner;
-    public final static String selectedPosKey = "selectedPosition",
-            player1ScoreKey = "playerScore1Key", player2ScoreKey="playerScore2Key", drawScoreKey = "drawScoreKey";
+    public final static String selectedPosKey = "selectedPosition", player1ScoreKey = "playerScore1Key", player2ScoreKey="playerScore2Key", drawScoreKey = "drawScoreKey";
     int pos = 0;
 
     @Override

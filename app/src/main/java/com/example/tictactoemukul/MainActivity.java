@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
     int[][] winnerRowsColumns = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
             {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
 
-    int[][] charactersArrays = {{R.drawable.oimage, R.drawable.ximage}, {R.drawable.tom, R.drawable.jerry}, {R.drawable.rohit, R.drawable.virat}};
+    int[][] charactersArrays = {{R.drawable.oimage, R.drawable.ximage}, {R.drawable.tom, R.drawable.jerry}, {R.drawable.virat, R.drawable.rohit}};
 
-    String[][] nameOfPlayersArray = {{"0", "X"}, {"Tom", "Jerry"}, {"Rohit", "Virat"}};
+    String[][] nameOfPlayersArray = {{"0", "X"}, {"Tom", "Jerry"}, {"Virat", "ROhit"}};
 
     String winner = "";
 

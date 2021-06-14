@@ -4,9 +4,9 @@
     <string name="player_time">%d sec.</string>
 
     <string-array name="spinner_arrays">
-        <item>Default X and 0</item>
-        <item>Tom and Jerry</item>
-        <item>Virat and Rohit</item>
+        <item>Default X Vs 0</item>
+        <item>Tom Vs Jerry</item>
+        <item>Partima VS Mukul</item>
 
     </string-array>
 </resources>
