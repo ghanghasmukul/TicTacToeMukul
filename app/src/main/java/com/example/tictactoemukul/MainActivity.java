@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     int[][] charactersArrays = {{R.drawable.oimage, R.drawable.ximage}, {R.drawable.tom, R.drawable.jerry}, {R.drawable.virat, R.drawable.rohit}};
 
-    String[][] nameOfPlayersArray = {{"0", "X"}, {"Tom", "Jerry"}, {"Virat", "ROhit"}};
+    String[][] nameOfPlayersArray = {{"0", "X"}, {"Tom", "Jerry"}, {"Virat", "Rohit"}};
 
     String winner = "";
 
