@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="497dp"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/rocket3"
-        app:lottie_repeatCount="2"
+        app:lottie_rawRes="@raw/loader"
+        app:lottie_repeatCount="1"
         android:layout_marginTop="16dp"/>
     <TextView
         android:id="@+id/textView"

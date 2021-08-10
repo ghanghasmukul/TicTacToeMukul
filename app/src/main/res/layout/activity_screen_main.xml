@@ -54,9 +54,10 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="375dp"
-                android:layout_height="201dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="243dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
                 app:srcCompat="@drawable/main2" />
 
             <TextView
@@ -101,34 +102,26 @@
                 app:spinner_popup_background="@color/white"
                 app:spinner_popup_elevation="8dp" />
 
+            <Button
+
+                android:id="@+id/button"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/white"
+                android:text="START"
+                android:textAlignment="center"
+                android:textColor="#EA80FC"
+                android:textSize="48dp"
+                android:textStyle="italic"
+
+                />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="382dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="250dp"
-        android:backgroundTint="@color/white"
-        android:focusableInTouchMode="true"
-        app:cardCornerRadius="16dp">
 
-
-        <Button
-
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/white"
-            android:text="START"
-            android:textAlignment="center"
-            android:textColor="#EA80FC"
-            android:textSize="56sp"
-            android:textStyle="italic"
-
-            />
-    </androidx.cardview.widget.CardView>
 
 </FrameLayout>
